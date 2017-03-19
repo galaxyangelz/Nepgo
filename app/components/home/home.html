@@ -1,0 +1,99 @@
+<div ng-show="postedSuccessfully">
+    <p>Assignment posted successfully !!</p>
+</div>
+<div ng-if="!$state.is('home.profile') && !$state.is('home.userProfile') && !$state.is('home.sector')" style="padding:20px" class="box box-widget container">
+    <button class="pull-right btn btn-primary btn-flat" ng-click="postAssignment = !postAssignment"> Post an Assignment  <i ng-if="postAssignment" style="word-spacing: 20px;" class="fa fa-caret-down"></i><i ng-if="!postAssignment" style="word-spacing: 20px;" class="fa fa-caret-up"></i>  </button>
+    <h4>Assignment</h4>
+    <form name="statusForm" ng-submit="postStatus(status)" ng-show="postAssignment">
+        <div class="form-group has-feedback">
+            <input type="text" class="form-control" placeholder="title" ng-model="status.title">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="3" placeholder="Description..." ng-model="status.description"></textarea>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-12 form-group has-feedback">
+                <label>Sectors</label>
+                <select ng-options="sector._id as sector.name for sector in sectors" ng-model="status.sector"></select>
+            </div>
+            <div class="col-md-4 col-sm-12 form-group has-feedback">
+                <input type="date" class="form-control" data-date-format="MM-DD-YYYY" placeholder="startDate MM/DD/YYYY" ng-model="selectedDate.starts_at">
+            </div>
+            <div class="col-md-4 col-sm-12 form-group has-feedback">
+                <input type="date" class="form-control" data-date-format="MM-DD-YYYY" placeholder="endDate MM/DD/YYYY" ng-model="selectedDate.ends_at">
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- /.col -->
+            <div class="col-xs-12">
+                <button type="submit" class="pull-right btn btn-primary btn-flat">Post</button>
+            </div>
+            <!-- /.col -->
+        </div>
+    </form>
+</div>
+
+<div ng-if="!$state.is('home.profile') && !$state.is('home.userProfile') && !$state.is('home.sector')" ng-repeat="news in newsfeed | orderBy: 'created':true | filter:searchPost" class="box box-widget container">
+    <div class="box-header with-border">
+        <div class="user-block">
+            <img class="img-circle" src="dist/img/avatar.png" alt="User Image">
+            <span class="username">
+                <a ng-click="getProfile(news.vacancy.user._id)">
+                    {{news.vacancy.user.name }}
+                </a>  
+                <i style="word-spacing: 20px;" class="fa fa-caret-right"></i>  
+                <span style="margin-left: 5px; margin-right: 5px;">{{news.vacancy.user.role | uppercase}}</span>
+            </span>
+            <span class="description">
+                posted in 
+                <a ng-click="getNewsfeedBySector(news.sector)">
+                    {{news.vacancy.sector | sectorFilter}}
+                </a> sector - {{news.vacancy.updated}}
+            </span>
+        </div>
+        <!-- /.user-block -->
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body mx-auto">
+        <!-- post text -->
+        <h3>{{news.vacancy.title}}</h3>
+        <p>{{news.vacancy.description}}</p>
+
+        <!-- Social sharing buttons -->
+        <button type="button" class="btn btn-default btn-xs" ng-click="likePost(news._id, $index)"><i class="fa fa-thumbs-o-up"></i> Like</button>
+        <span class="pull-right text-muted">{{news.likes.length | likesFilter}} - {{news.comments.length}} comments</span>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer box-comments" ng-repeat="comment in news.comments">
+        <div class="box-comment">
+            <!-- User image -->
+            <img class="img-circle img-sm" src="dist/img/avatar.png" alt="User Image">
+
+            <div class="comment-text">
+                <span class="username">
+                        {{comment.user.name}}
+                        <i style="word-spacing: 20px;" class="fa fa-caret-right"></i>  
+                <span style="margin-left: 5px; margin-right: 5px;">{{comment.user.role | uppercase}}</span>
+                <span class="text-muted pull-right">{{comment.updated}}</span>
+                </span>
+                <!-- /.username -->
+                {{comment.text}}
+            </div>
+            <!-- /.comment-text -->
+        </div>
+        <!-- /.box-comment -->
+    </div>
+    <!-- /.box-footer -->
+    <div class="box-footer">
+        <div>
+            <img class="img-responsive img-circle img-sm" src="dist/img/avatar.png" alt="Alt Text">
+            <!-- .img-push is used to add margin to elements next to floating images -->
+            <div class="img-push">
+                <input type="text" class="form-control input-sm" ng-keypress="($event.charCode==13)? postComment($event,news._id) : return" placeholder="Press enter to post comment">
+            </div>
+        </div>
+    </div>
+    <!-- /.box-footer -->
+</div>
+<div ui-view></div>

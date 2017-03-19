@@ -1,0 +1,89 @@
+<div class="register-box">
+    <div class="register-logo">
+        <a><b>NEP</b>GO</a>
+    </div>
+
+    <div class="register-box-body">
+        <h4 class="login-box-msg">Register a new membership</h4>
+        <p>All the fills are required</p>
+        <form name="registerForm" ng-submit="register(user)" ng-class="{'submitted' : submitted}">
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="Email" ng-model="user.email" name="email" required>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Full name" ng-model="user.name" name="name" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <label for="role">Role</label>
+                <select name="role" id="role" ng-model="user.role" class="form-control">
+                    <option ng-repeat="role in roles track by $index">{{role}}</option>
+                </select>
+            </div>
+            <div class="form-group has-feedback">
+                <label>Country</label>
+                <select name="country" id="country" ng-model="user.country" class="form-control">
+                    <option ng-repeat="country in countries track by $index">{{country.iso}}</option>
+                  </select>
+            </div>
+            <div class="form-group has-feedback">
+                <label>City</label>
+                <select name="city" id="city" ng-model="user.city" class="form-control">
+                    <option ng-repeat="city in cities track by $index">{{city}}</option>
+                  </select>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Address" ng-model="user.address" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <label>Select your sectors</label>
+            <div class="form-group has-feedback">
+                <div class="checkbox" ng-repeat="sector in sectors">
+                    <label>
+                      <input type="checkbox" name="user.sectors[]" value="{{sector._id}}" ng-checked="user.sectors.indexOf(sector._id) > -1" ng-click="toggleCheck(sector)">
+                      {{sector.name}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Experiences" ng-model="user.experiences" ng-list required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Education" ng-model="user.educations" ng-list required>
+                <span class="glyphicon glyphicon-education form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Skills" ng-model="user.skills" ng-list required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Profession" ng-model="user.profession" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" ng-model="user.password" required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Confirm password" ng-model="user.confirmPassword" required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <textarea cols="50" placeholder="Tell about yourself in 30 words" ng-model="user.extra_info"></textarea>
+                <span class="glyphicon glyphicon-comment form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="submitted = true;">Register</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+        <a ui-sref="login" class="text-center">I already have a membership</a>
+    </div>
+    <!-- /.form-box -->
+</div>

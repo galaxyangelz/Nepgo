@@ -1,0 +1,30 @@
+<div class="login-box">
+    <div class="login-logo">
+        <a><b>NEP</b>GO</a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+
+        <form name="loginForm" ng-submit="login(credentials)">
+            <div class="form-group has-feedback">
+                <input id="email" type="email" class="form-control" placeholder="Email" ng-model="credentials.email">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input id="password" type="password" class="form-control" placeholder="Password" ng-model="credentials.password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <!-- /.col -->
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+        <a ui-sref="register" class="text-center">Register a new membership</a>
+
+    </div>
+    <!-- /.login-box-body -->
+</div>

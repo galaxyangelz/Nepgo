@@ -1,0 +1,42 @@
+<section class="content">
+
+    <!-- row -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- The time line -->
+            <ul class="timeline" ng-repeat="timeline in timelines">
+                <!-- timeline time label -->
+                <li class="time-label">
+                    <span class="bg-red">
+                    {{timeline.date}}
+                  </span>
+                    <ul class="timeline" ng-repeat="event in timeline.events">
+                        <li>
+                            <i ng-if="event.type == 'email'" class="fa fa-envelope bg-blue"></i>
+                            <i ng-if="event.type == 'friend_request'" class="fa fa-user bg-aqua"></i>
+                            <i ng-if="event.type == 'commented'" class="fa fa-comments bg-yellow"></i>
+
+                            <div class="timeline-item">
+                                <span class="time"><i class="fa fa-clock-o"></i> {{12:05}}</span>
+
+                                <h3 class="timeline-header"><a href="#">{{event.sender}}</a> {{event.text}}</h3>
+
+                                <div class="timeline-body">
+                                    {{event.content}}
+                                </div>
+                                <div ng-if="event.type == 'email'" class="timeline-footer">
+                                    <a class="btn btn-primary btn-xs">Read more</a>
+                                    <a class="btn btn-danger btn-xs">Delete</a>
+                                </div>
+                                <div ng-if="event.type == 'commented'" class="timeline-footer">
+                                    <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- /.col -->
+    </div>
+</section>

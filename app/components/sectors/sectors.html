@@ -1,0 +1,54 @@
+<div>
+
+</div>
+<div ng-if="!$state.is('home.profile')" ng-repeat="news in newsfeedBySector" class="box box-widget container">
+    <div class="box-header with-border">
+        <div class="user-block">
+            <img class="img-circle" src="http://www.imran.com/xyper_images/icon-user-default.png" alt="User Image">
+            <span class="username"><a>{{news.vacancy.user.name}}</a></span>
+            <span class="description">posted in <a>{{news.vacancy.sector | sectorFilter}}</a> sector - {{news.vacancy.updated}}</span>
+        </div>
+        <!-- /.user-block -->
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body mx-auto">
+        <!-- post text -->
+        <h3>{{news.vacancy.title}}</h3>
+        <p>{{news.vacancy.description}}</p>
+
+        <!-- Social sharing buttons -->
+        <button type="button" class="btn btn-default btn-xs" ng-click="likePost(news._id, $index)"><i class="fa fa-thumbs-o-up"></i> Like</button>
+        <span class="pull-right text-muted">{{news.vacancy.likes.length | likesFilter}} - {{news.vacancy.comments.length}} comments</span>
+    </div>
+    <!-- /.box-body -->
+    <!-- /.box-comment -->
+    <div class="box-footer box-comments" ng-repeat="comment in news.vacancy.comments">
+        <div class="box-comment">
+            <!-- User image -->
+            <img class="img-circle img-sm" src="http://www.imran.com/xyper_images/icon-user-default.png" alt="User Image">
+
+            <div class="comment-text">
+                <span class="username">
+                        {{comment.user.name}}
+                        <span class="text-muted pull-right">{{comment.updated}}</span>
+                </span>
+                <!-- /.username -->
+                {{comment.text}}
+            </div>
+            <!-- /.comment-text -->
+        </div>
+        <!-- /.box-comment -->
+    </div>
+    <!-- /.box-comment -->
+</div>
+<!-- /.box-footer -->
+<div class="box-footer">
+    <div>
+        <img class="img-responsive img-circle img-sm" src="http://www.imran.com/xyper_images/icon-user-default.png" alt="Alt Text">
+        <!-- .img-push is used to add margin to elements next to floating images -->
+        <div class="img-push">
+            <input type="text" class="form-control input-sm" ng-keypress="($event.charCode==13)? postComment($event,news._id) : return" placeholder="Press enter to post comment">
+        </div>
+    </div>
+</div>
+<!-- /.box-footer -->
