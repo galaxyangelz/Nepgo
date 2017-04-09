@@ -13,6 +13,17 @@ servicesModule.service('profileService', ['$http', '$state', function($http, $st
             $state.go('login');
         }
     };
+    profileService.editProfile = function (id, token, profile) {
+        if (token) {
+            return $http
+                .put('https://nepgo.herokuapp.com/user/' + id + '?token=' + token, profile)
+                .then(function (res) {
+                    return res.data;
+                }, function (err) {
+                    return err.data.err;
+                });
+        }
+    }
 
     return profileService;
 }]);

@@ -22,11 +22,17 @@
 
             <!-- About Me Box -->
             <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">About Me</h3>
+                <div class="row">
+                    <div class="col-md-10 col-sm-5 col-xs-5">
+                        <h3 class="box-title">About Me</h3>
+                    </div>
+                    <div class="col-md-2 col-sm-5 col-xs-4 ng-scope">
+                        <a style="float:right;" class="btn btn-primary ng-scope" ng-if="!editorEnabled" ng-click="edit()">Edit <span class="glyphicon glyphicon-edit"></span></a>
+                        <a style="float:right;" class="btn btn-primary ng-scope" ng-if="editorEnabled" ng-click="save()">Save <span class="glyphicon glyphicon-edit"></span></a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body" ng-if="!editorEnabled">
                     <div>
                         <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
                         <ul ng-repeat="education in userProfile.educations">
@@ -37,7 +43,7 @@
                     <div>
                         <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-                        <p class="text-muted">{{userProfile.city}}, {{userProfile.country}}</p>
+                        <p class="text-muted">{{userProfile.city}} {{userProfile.country}}</p>
                     </div>
                     <hr>
                     <div>
@@ -53,6 +59,37 @@
                         <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
 
                         <p>{{userProfile.extra_info}}</p>
+                    </div>
+                </div>
+                <div class="box-body" ng-if="editorEnabled">
+                    <div>
+                        <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                        <textarea ng-if="editorEnabled" class="form-control ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" ng-list="" type="text" ng-model="profile.educations"></textarea><!-- end ngIf: editorEnabled -->
+                    </div>
+                    <hr>
+                    <div>
+                        <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                        <ul class="text-muted" style="list-style: none">
+                            <li class="ng-binding">kathmandu, NP</li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div>
+                        <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                        <textarea ng-if="editorEnabled" class="form-control ng-pristine ng-untouched ng-valid ng-scope ng-empty" ng-list="" type="text" ng-model="profile.skills"></textarea><!-- end ngIf: editorEnabled -->
+                    </div>
+
+                    <hr>
+                    <div>
+                        <strong><i class="fa fa-pencil margin-r-5"></i> Experiences</strong>
+                        <textarea ng-if="editorEnabled" class="form-control ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" ng-list="" type="text" ng-model="profile.experiences"></textarea><!-- end ngIf: editorEnabled -->
+                    </div>
+
+                    <hr>
+                    <div>
+                        <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                        <textarea ng-if="editorEnabled" class="form-control ng-pristine ng-untouched ng-valid ng-scope ng-not-empty" type="text" ng-model="profile.extra_info"></textarea><!-- end ngIf: editorEnabled -->
                     </div>
                 </div>
                 <!-- /.box-body -->

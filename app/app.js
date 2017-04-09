@@ -1,4 +1,4 @@
-var nepgoApp = angular.module('nepgoApp', ['ui.router', 'nepgoApp.controllers', 'nepgoApp.services', 'nepgoApp.directives', 'nepgoApp.filters']);
+var nepgoApp = angular.module('nepgoApp', ['ui.router', 'ui.bootstrap', 'nepgoApp.controllers', 'nepgoApp.services', 'nepgoApp.directives', 'nepgoApp.filters']);
 
 nepgoApp.
 constant('AUTH_EVENTS', {
@@ -78,8 +78,8 @@ constant('AUTH_EVENTS', {
             })
             .state('home.userProfile', {
                 parent: 'home',
-                url: '/userProfile',
-                templateUrl: 'app/shared/userProfile.html',
+                url: '/userProfile/',
+                templateUrl: 'app/components/profile/profile.html',
                 controller: 'ApplicationController'
             });
     })

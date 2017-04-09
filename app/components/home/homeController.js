@@ -1,6 +1,6 @@
-controllersModule.controller('homeController', ['$scope', 'userService', 'Session', 'ApplicationService', 'homeService', 'profileService', '$state', 'sectorService',
+controllersModule.controller('homeController', ['$scope', 'userService', 'Session', 'ApplicationService', 'homeService', 'profileService', '$state', 'sectorService', '$timeout',
 
-    function($scope, userService, Session, ApplicationService, homeService, profileService, $state, sectorService) {
+    function ($scope, userService, Session, ApplicationService, homeService, profileService, $state, sectorService, $timeout) {
         $scope.newsfeed = [];
         $scope.userProfile = {};
         $scope.newsfeedBySector = [];
@@ -28,7 +28,6 @@ controllersModule.controller('homeController', ['$scope', 'userService', 'Sessio
         function init() {
             homeService.getNewsfeed(token).then(function(newsfeed) {
                 $scope.newsfeed = newsfeed;
-                console.log($scope.newsfeed);
             }, function() {});
             getSectors();
         }
@@ -82,11 +81,12 @@ controllersModule.controller('homeController', ['$scope', 'userService', 'Sessio
         $scope.postStatus = function(status) {
             $scope.status.starts_at = $scope.selectedDate.starts_at.toISOString();
             $scope.status.ends_at = $scope.selectedDate.ends_at.toISOString();
-            homeService.postStatus(token, status).then(function() {
-                init();
-                $scope.$apply();
-                $scope.postedSuccessfully = true;
-                setTimeout(function() { $scope.postedSuccessfully = false }, 2000);
+            homeService.postStatus(token, status).then(function (response) {
+                if (typeof response == 'object') {
+                    $scope.postedSuccessfully = true;
+                    init();
+                    $timeout(function () { $scope.postedSuccessfully = false; }, 2000);
+                }
             });
             $scope.status = {
                 title: "",

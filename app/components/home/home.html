@@ -1,8 +1,12 @@
-<div ng-show="postedSuccessfully">
+<section ng-show="postedSuccessfully">
     <p>Assignment posted successfully !!</p>
-</div>
+</section>
 <div ng-if="!$state.is('home.profile') && !$state.is('home.userProfile') && !$state.is('home.sector')" style="padding:20px" class="box box-widget container">
-    <button class="pull-right btn btn-primary btn-flat" ng-click="postAssignment = !postAssignment"> Post an Assignment  <i ng-if="postAssignment" style="word-spacing: 20px;" class="fa fa-caret-down"></i><i ng-if="!postAssignment" style="word-spacing: 20px;" class="fa fa-caret-up"></i>  </button>
+    <button class="pull-right btn btn-primary btn-flat" ng-click="postAssignment = !postAssignment"> 
+        Post an Assignment  
+        <i ng-if="postAssignment" style="word-spacing: 20px;" class="fa fa-caret-down"></i>
+        <i ng-if="!postAssignment" style="word-spacing: 20px;" class="fa fa-caret-up"></i> 
+     </button>
     <h4>Assignment</h4>
     <form name="statusForm" ng-submit="postStatus(status)" ng-show="postAssignment">
         <div class="form-group has-feedback">
@@ -26,8 +30,10 @@
 
         <div class="row">
             <!-- /.col -->
-            <div class="col-xs-12">
-                <button type="submit" class="pull-right btn btn-primary btn-flat">Post</button>
+            <div class="col-xs-12" ng-click="open()">
+                <button type="submit" class="pull-right btn btn-primary btn-flat" ng-click="open('success')">
+                    Post
+                </button>
             </div>
             <!-- /.col -->
         </div>

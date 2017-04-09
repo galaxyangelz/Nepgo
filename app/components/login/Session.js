@@ -39,6 +39,5 @@ servicesModule.factory('Session', ['$http', '$window', function($http, $window) 
     };
 
     factory.loadUserCredentials();
-
     return factory;
 }]);
